@@ -1,6 +1,7 @@
 # frontend_ecommerce
 
 > A Vue.js project
+this is an ecommerce website that sells food products. this project is not intended for release. it was for training purspose.
 
 ## Build Setup
 
