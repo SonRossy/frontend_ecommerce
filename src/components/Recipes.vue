@@ -1,5 +1,5 @@
 <template>
-  <div class="container" style="margin-top: 6%">
+  <div class="container" style="margin-top: 8%">
     <div class="row">
       <!------------------------------------------Recipe titles column--------------------------------------------------->
       <div class="col-mid-3 recipeCol">

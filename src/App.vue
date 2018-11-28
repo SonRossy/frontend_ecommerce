@@ -40,18 +40,15 @@ export default {
       {id: 8, name: 'beef', price: 3.64, category: 'meat', qt: 0}
     ]
     this.products = dummy
-    bus.$on('currentDisplay', (category) => {
+    bus.$on('currentDisplay', (nameOrCategory) => {
       this.products = dummy
       this.products = this.products.filter(data => {
-        if (category === 'fruit') {
-          return (data.category === 'fruit')
-        } else if (category === 'meat') {
-          return (data.category === 'meat')
-        } else if (category === 'vegetable') {
-          return (data.category === 'vegetable')
-        } else {
+        // if search or category is all then we return the whole product list
+        if (nameOrCategory === 'all') {
           return this.products
         }
+        // but if it is equal to a name of product then we return the name or category
+        return (data.name.startsWith(nameOrCategory)) || (data.category.startsWith(nameOrCategory))
       })
       console.log(this.products)
     })
@@ -81,4 +78,7 @@ export default {
   max-height: 400px;
   // width: 100%;
 }
+  .mainDiv{
+    background: aliceblue;
+  }
 </style>

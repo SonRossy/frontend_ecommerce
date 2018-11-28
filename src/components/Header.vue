@@ -19,8 +19,7 @@
           </div>
         </div>
         <div class="col-md-4 form-group ">
-          <input class="form-control mr-1" type="text" placeholder="Search">
-          <input class="form-control mr-1" type="button" value="Search">
+          <input v-on:input="search()" v-model="searchText" class="form-control mr-1 form-control-lg search" type="text" placeholder="Search product">
         </div>
       </div>
     </div>
@@ -34,7 +33,8 @@ export default {
   props: ['showProduct'],
   data () {
     return {
-      showMenu: false
+      showMenu: true,
+      searchText: ''
     }
   },
   methods: {
@@ -67,6 +67,12 @@ export default {
     },
     displayVegetable () {
       bus.$emit('currentDisplay', 'vegetable')
+    },
+    search () {
+      bus.$emit('currentDisplay', this.searchText)
+      this.showMenu = true
+      this.$router.push({name: 'Header'})
+      this.$props.showProduct.yes = true
     }
   }
 }
@@ -74,5 +80,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.search{
+  width: 100%;
+  margin-bottom: 1%;
+}
 </style>
