@@ -42,7 +42,6 @@
 <script>
 export default {
   created () {
-    console.log('i am created')
   }
 }
 </script>

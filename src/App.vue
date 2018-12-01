@@ -30,14 +30,14 @@ export default {
   name: 'App',
   created () {
     var dummy = [
-      {id: 1, name: 'apple', price: 2.1, category: 'fruit', qt: 0},
-      {id: 2, name: 'orange', price: 1.23, category: 'fruit', qt: 0},
-      {id: 3, name: 'lettuce', price: 0.98, category: 'vegetable', qt: 0},
-      {id: 4, name: 'berry', price: 1.99, category: 'fruit', qt: 0},
-      {id: 5, name: 'goat', price: 3.64, category: 'meat', qt: 0},
-      {id: 6, name: 'broccoli', price: 0.98, category: 'vegetable', qt: 0},
-      {id: 7, name: 'strawberry', price: 1.99, category: 'fruit', qt: 0},
-      {id: 8, name: 'beef', price: 3.64, category: 'meat', qt: 0}
+      {id: 1, name: 'apple', price: 2.1, category: 'fruit', qt: 0, url: '/static/ProudctImage/apple.jpg'},
+      {id: 2, name: 'orange', price: 1.23, category: 'fruit', qt: 0, url: '/static/ProudctImage/orange.jpg'},
+      {id: 3, name: 'lettuce', price: 0.98, category: 'vegetable', qt: 0, url: '/static/ProudctImage/lettuce.jpg'},
+      {id: 4, name: 'blue berry', price: 1.99, category: 'fruit', qt: 0, url: '/static/ProudctImage/blueBerry.jpg'},
+      {id: 5, name: 'chicken', price: 3.64, category: 'meat', qt: 0, url: '/static/ProudctImage/chicken.jpg'},
+      {id: 6, name: 'broccoli', price: 0.98, category: 'vegetable', qt: 0, url: '/static/ProudctImage/broccoli.jpg'},
+      {id: 7, name: 'strawberry', price: 1.99, category: 'fruit', qt: 0, url: '/static/ProudctImage/strawberry.jpg'},
+      {id: 8, name: 'beef', price: 3.64, category: 'meat', qt: 0, url: '/static/ProudctImage/beef.jpg'}
     ]
     this.products = dummy
     bus.$on('currentDisplay', (nameOrCategory) => {
@@ -50,7 +50,6 @@ export default {
         // but if it is equal to a name of product then we return the name or category
         return (data.name.startsWith(nameOrCategory)) || (data.category.startsWith(nameOrCategory))
       })
-      console.log(this.products)
     })
   },
   data () {
