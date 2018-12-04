@@ -27,9 +27,7 @@ import Header from './components/Header'
 import Cart from './components/Cart'
 import axios from 'axios'
 import {bus} from './main'
-import ProcessPayment from './Js/ProcessPayment'
 export default {
-  mixins: [ProcessPayment],
   name: 'App',
   created () {
     // ProcessPayment.methods.checkout()

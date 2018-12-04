@@ -54,7 +54,6 @@
 
 <script>
 import {bus} from '../main'
-import ViewProudct from './ViewProduct'
 export default {
   props: ['product', 'isCartEmpty'],
   data () {
@@ -99,9 +98,6 @@ export default {
         this.$props.product.quantity = 0
       }
     })
-  },
-  components: {
-    'viewProudct': ViewProudct
   }
 }
 </script>

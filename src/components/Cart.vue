@@ -32,9 +32,7 @@
 </template>
 <script>
 import {bus} from '../main'
-import ProcessPayment from '../Js/ProcessPayment'
 export default {
-  mixins: [ProcessPayment],
   props: [],
   data () {
     return {
@@ -78,10 +76,28 @@ export default {
       bus.$emit('isCartEmpty', this.isCartEmpty)
     },
     pay () {
-      ProcessPayment.methods.son()
+      let paypalForm = `
+   <form id="paypal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart">
+        <input type="hidden" name="upload" value="1">
+        <input type="hidden" name="business" value="adrian@webdev.tube">
+        `
+      this.cartItems.forEach((cartItem, index) => {
+        console.log(this.cartItems)
+        ++index
+        paypalForm += `
+        <input type="hidden" name="item_name_${index}" value="${cartItem.name}">
+        <input type="hidden" name="amount_${index}" value="${cartItem.price}">
+        <input type="hidden" name="quantity_${index}" value="${cartItem.quantity}">
+        `
+      })
+      paypalForm += `<input type="submit" value="PayPal"> </form> <div class="overlay"></div>`
+      document.querySelector('body').insertAdjacentHTML('beforeend', paypalForm)
+      document.getElementById('paypal-form').submit()
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
