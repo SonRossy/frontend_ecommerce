@@ -1,7 +1,7 @@
 <template>
   <div @click="displayProductView()" >
     <div class="card" style="width:200px">
-      <img class="card-img-top" :src="product.url" alt="Card image" style="width:100%">
+      <img class="card-img-top" :src="product.imageURL" alt="Card image" style="width:100%">
       <div class="card-body">
         <p class="card-text">{{product.name}}</p>
         <p class="card-text">${{product.price}}</p>
@@ -9,7 +9,7 @@
         <div v-else>
           <div>
             <a  @click.prevent.stop="addingUnit" href="#" class="btn btn-primary mr-2">+</a>
-            <span class="mr-2">{{product.qt}}</span>
+            <span class="mr-2">{{product.quantity}}</span>
             <a  @click.prevent.stop="deductUnit" href="#" class="btn btn-primary mr-2">-</a>
           </div>
         </div>
@@ -42,14 +42,11 @@
         25g 8Dietary Fiber
         4.4g 17 Sugars 18.9 g Other Carbohydrates 2 gProtein
         0.5g
-        Vitamin A
-        2
+        Vitamin A 2
         Vitamin C
         11
-        Calcium
-        1
-        Iron
-        0
+        Calcium 1
+        Iron 0
       </div>
   </div>
   </div>
@@ -72,20 +69,20 @@ export default {
   methods: {
     addToCart () {
       this.isItemInCart = true
-      this.$props.product.qt++
+      this.$props.product.quantity++
       this.cartIncrease++
       bus.$emit('itemAdded', this.$props.product)
       bus.$emit('cartIncrease', this.cartIncrease)
     },
     addingUnit () {
-      this.$props.product.qt++
+      this.$props.product.quantity++
       this.cartIncrease++
       bus.$emit('cartIncrease', this.$props.product)
     },
     deductUnit () {
-      this.$props.product.qt--
+      this.$props.product.quantity--
       this.cartDecrease--
-      if (this.$props.product.qt < 1) {
+      if (this.$props.product.quantity < 1) {
         this.isItemInCart = false
       }
       bus.$emit('cartDecrease', this.$props.product)
@@ -99,7 +96,7 @@ export default {
     bus.$on('isCartEmpty', (isCartEmpty) => {
       if (isCartEmpty) {
         this.isItemInCart = false
-        this.$props.product.qt = 0
+        this.$props.product.quantity = 0
       }
     })
   },

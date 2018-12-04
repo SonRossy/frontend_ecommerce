@@ -8,7 +8,6 @@
           <h4 class="modal-title">Modal Heading</h4>
           <button @click="closeWindow()" type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-
         <!-- Modal body -->
         <div class="modal-body">
           Modal body..

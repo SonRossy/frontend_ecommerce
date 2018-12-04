@@ -25,23 +25,27 @@
 import Product from './components/Product'
 import Header from './components/Header'
 import Cart from './components/Cart'
+import axios from 'axios'
 import {bus} from './main'
+import ProcessPayment from './Js/ProcessPayment'
 export default {
+  mixins: [ProcessPayment],
   name: 'App',
   created () {
-    var dummy = [
-      {id: 1, name: 'apple', price: 2.1, category: 'fruit', qt: 0, url: '/static/ProudctImage/apple.jpg'},
-      {id: 2, name: 'orange', price: 1.23, category: 'fruit', qt: 0, url: '/static/ProudctImage/orange.jpg'},
-      {id: 3, name: 'lettuce', price: 0.98, category: 'vegetable', qt: 0, url: '/static/ProudctImage/lettuce.jpg'},
-      {id: 4, name: 'blue berry', price: 1.99, category: 'fruit', qt: 0, url: '/static/ProudctImage/blueBerry.jpg'},
-      {id: 5, name: 'chicken', price: 3.64, category: 'meat', qt: 0, url: '/static/ProudctImage/chicken.jpg'},
-      {id: 6, name: 'broccoli', price: 0.98, category: 'vegetable', qt: 0, url: '/static/ProudctImage/broccoli.jpg'},
-      {id: 7, name: 'strawberry', price: 1.99, category: 'fruit', qt: 0, url: '/static/ProudctImage/strawberry.jpg'},
-      {id: 8, name: 'beef', price: 3.64, category: 'meat', qt: 0, url: '/static/ProudctImage/beef.jpg'}
-    ]
-    this.products = dummy
+    // ProcessPayment.methods.checkout()
+    // making call to our back end api to get the products
+    axios.get('http://localhost:8080/products', {
+    })
+      .then(response => {
+        console.log(response.data)
+        this.products = response.data
+        this.productsFromApi = response.data
+      })
+      .catch(e => {
+        console.log('error', e)
+      })
     bus.$on('currentDisplay', (nameOrCategory) => {
-      this.products = dummy
+      this.products = this.productsFromApi
       this.products = this.products.filter(data => {
         // if search or category is all then we return the whole product list
         if (nameOrCategory === 'all') {
@@ -55,6 +59,7 @@ export default {
   data () {
     return {
       products: [],
+      productsFromApi: [],
       showProduct: {yes: true}
     }
   },
